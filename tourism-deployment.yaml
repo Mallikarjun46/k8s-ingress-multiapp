@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tourism-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tourism-app
+  template:
+    metadata:
+      labels:
+        app: tourism-app
+    spec:
+      containers:
+      - name: tourism-app
+        image: mallikarjun46/karnataka-tourism:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tourism-service
+spec:
+  selector:
+    app: tourism-app
+  ports:
+  - port: 80
+    targetPort: 80
+
